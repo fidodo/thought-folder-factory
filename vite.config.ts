@@ -21,7 +21,6 @@ import path from "path";
 //   },
 // }));
 
-
 export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
@@ -29,13 +28,12 @@ export default defineConfig(({ mode }) => ({
   },
   plugins: [
     react(),
-    mode === "development" &&
-      {
-        name: "dev-log-plugin",
-        buildStart() {
-          console.log("Running in Dev Mode");
-        },
+    mode === "development" && {
+      name: "dev-log-plugin",
+      buildStart() {
+        console.log("Running in Dev Mode");
       },
+    },
   ].filter(Boolean),
   resolve: {
     alias: {

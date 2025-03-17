@@ -1,7 +1,3 @@
-
-
-
-
 ```sh
 # Step 1: Clone the repository using the project's Git URL.
 git clone <YOUR_GIT_URL>
@@ -56,6 +52,7 @@ npm run dev
 This project is built with:
 
 - Frontend:
+
   - Vite
   - TypeScript
   - React
@@ -68,12 +65,9 @@ This project is built with:
   - PostgreSQL
   - Firebase Admin SDK
 
-
-<!-- 
+<!--
 For deploying the backend:
 1. Set up a server (e.g., Heroku, Render, Railway)
 2. Configure environment variables on your hosting platform
 3. Deploy the server code
 4. Update the frontend API_URL to point to your deployed backend -->
-
-

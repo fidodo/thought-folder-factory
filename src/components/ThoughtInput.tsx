@@ -8,10 +8,10 @@ interface ThoughtInputProps {
   placeholder?: string;
 }
 
-const ThoughtInput = ({ 
-  onAddThought, 
+const ThoughtInput = ({
+  onAddThought,
   inputRef: externalInputRef,
-  placeholder = "Add a new thought..." 
+  placeholder = "Add a new thought...",
 }: ThoughtInputProps) => {
   const [text, setText] = useState("");
   const [isExpanded, setIsExpanded] = useState(false);
@@ -43,7 +43,7 @@ const ThoughtInput = ({
 
   const handleSubmit = async () => {
     if (!text.trim()) return;
-    
+
     try {
       setIsLoading(true);
       await onAddThought(text);
@@ -82,7 +82,9 @@ const ThoughtInput = ({
   };
 
   return (
-    <div className={`w-full transition-all duration-300 ease-out ${isExpanded ? 'mb-6' : 'mb-0'}`}>
+    <div
+      className={`w-full transition-all duration-300 ease-out ${isExpanded ? "mb-6" : "mb-0"}`}
+    >
       <div className="relative glass rounded-xl shadow-glass transition-all duration-300 ease-out hover:shadow-lg">
         <textarea
           ref={inputRef}
@@ -91,11 +93,13 @@ const ThoughtInput = ({
           onKeyDown={handleKeyDown}
           placeholder={placeholder}
           className={`w-full resize-none overflow-hidden bg-transparent px-4 py-3 outline-none transition-all duration-300 text-lg ${
-            isExpanded ? 'min-h-[120px] rounded-t-xl border-b' : 'min-h-[56px] rounded-xl'
+            isExpanded
+              ? "min-h-[120px] rounded-t-xl border-b"
+              : "min-h-[56px] rounded-xl"
           }`}
-          style={{ color: 'hsl(var(--foreground))' }}
+          style={{ color: "hsl(var(--foreground))" }}
         />
-        
+
         {isExpanded && (
           <div className="flex items-center justify-between p-3 rounded-b-xl bg-secondary/50">
             <div className="flex items-center text-sm text-muted-foreground">
@@ -106,7 +110,7 @@ const ThoughtInput = ({
               onClick={handleSubmit}
               disabled={isLoading || !text.trim()}
               className={`flex items-center gap-2 rounded-lg px-4 py-2 font-medium transition-all duration-300
-                ${isLoading ? 'bg-muted cursor-not-allowed' : 'bg-idea text-white hover:bg-idea/90 hover-scale'}`}
+                ${isLoading ? "bg-muted cursor-not-allowed" : "bg-idea text-white hover:bg-idea/90 hover-scale"}`}
             >
               <Plus size={18} />
               <span>Add</span>

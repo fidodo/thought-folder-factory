@@ -1,4 +1,3 @@
-
 /**
  * Thought interface for representing a thought record
  */

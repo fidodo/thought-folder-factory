@@ -1,4 +1,3 @@
-
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { useState } from "react";
@@ -94,25 +93,32 @@ const SortableItem = ({
     >
       <div className="flex items-start gap-2">
         {/* Drag handle */}
-        <div {...listeners} className="cursor-grab touch-none mt-0.5 text-gray-400 hover:text-gray-600">
+        <div
+          {...listeners}
+          className="cursor-grab touch-none mt-0.5 text-gray-400 hover:text-gray-600"
+        >
           <GripVertical size={18} />
         </div>
-        
+
         <div className="flex-1">
           <div className="flex items-center justify-between">
             <div className="flex flex-wrap items-center gap-2">
               {folder && (
-                <span className={`inline-flex items-center px-2 py-0.5 text-xs font-medium rounded ${getBadgeColor()}`}>
+                <span
+                  className={`inline-flex items-center px-2 py-0.5 text-xs font-medium rounded ${getBadgeColor()}`}
+                >
                   {folder}
                 </span>
               )}
               {timestamp && (
                 <span className="text-xs text-gray-500">
-                  {formatDistanceToNow(new Date(timestamp), { addSuffix: true })}
+                  {formatDistanceToNow(new Date(timestamp), {
+                    addSuffix: true,
+                  })}
                 </span>
               )}
             </div>
-            
+
             {section === "ideas" && onUpdate && (
               <button
                 onClick={() => setShowUpdates(!showUpdates)}
@@ -122,14 +128,16 @@ const SortableItem = ({
               </button>
             )}
           </div>
-          
+
           <p className="mt-1 text-gray-800">{value}</p>
-          
+
           {/* Updates section - only visible for ideas */}
           {section === "ideas" && showUpdates && (
             <div className="mt-3 border-t border-gray-200 pt-2">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-xs font-semibold text-gray-500">Updates</span>
+                <span className="text-xs font-semibold text-gray-500">
+                  Updates
+                </span>
                 {onUpdate && (
                   <button
                     onClick={() => setShowUpdateInput(!showUpdateInput)}
@@ -139,7 +147,7 @@ const SortableItem = ({
                   </button>
                 )}
               </div>
-              
+
               {showUpdateInput && (
                 <div className="mb-2 flex">
                   <input
@@ -158,11 +166,14 @@ const SortableItem = ({
                   </button>
                 </div>
               )}
-              
+
               {updates.length > 0 ? (
                 <div className="space-y-2">
                   {updates.map((update, index) => (
-                    <div key={index} className="rounded-md bg-white p-2 text-sm shadow-sm">
+                    <div
+                      key={index}
+                      className="rounded-md bg-white p-2 text-sm shadow-sm"
+                    >
                       <div className="flex items-center justify-between">
                         <p>{update.text}</p>
                         <span className="text-xs text-gray-500">

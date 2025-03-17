@@ -12,12 +12,10 @@ const firebaseConfig = {
   measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 };
 
-
-
 console.log("Firebase config check:", {
   apiKeyExists: !!firebaseConfig.apiKey,
   authDomainExists: !!firebaseConfig.authDomain,
-  projectIdExists: !!firebaseConfig.projectId
+  projectIdExists: !!firebaseConfig.projectId,
 });
 
 // Ensure API key is not missing
@@ -28,7 +26,6 @@ if (!firebaseConfig.apiKey) {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-
 
 console.log("🔥 Firebase API Key:", import.meta.env.VITE_FIREBASE_API_KEY);
 export { auth };

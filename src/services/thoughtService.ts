@@ -1,4 +1,3 @@
-
 import { apiService } from "./apiService";
 import { storageService } from "./storageService";
 import { Thought, ThoughtFolder } from "./models";
@@ -31,7 +30,10 @@ export const thoughtService = {
         throw new Error("User not authenticated");
       }
 
-      const result = await apiService.post<Partial<Thought>, { thought: Thought }>("", thoughtData);
+      const result = await apiService.post<
+        Partial<Thought>,
+        { thought: Thought }
+      >("", thoughtData);
       return result.thought;
     } catch (error) {
       console.error("Error creating thought:", error);
@@ -40,13 +42,18 @@ export const thoughtService = {
   },
 
   // Update a thought
-  async updateThought(thoughtData: Partial<Thought> & { id: string }): Promise<Thought> {
+  async updateThought(
+    thoughtData: Partial<Thought> & { id: string },
+  ): Promise<Thought> {
     try {
       if (!authService.isAuthenticated()) {
         throw new Error("User not authenticated");
       }
 
-      const result = await apiService.put<Partial<Thought> & { id: string }, { thought: Thought }>("", thoughtData);
+      const result = await apiService.put<
+        Partial<Thought> & { id: string },
+        { thought: Thought }
+      >("", thoughtData);
       return result.thought;
     } catch (error) {
       console.error("Error updating thought:", error);
@@ -74,81 +81,97 @@ export const thoughtService = {
     try {
       if (!authService.isAuthenticated()) {
         // Fallback to localStorage if not authenticated
-        return storageService.get<ThoughtFolder[]>('folders', []);
+        return storageService.get<ThoughtFolder[]>("folders", []);
       }
 
-      const response = await apiService.get<{ folders: ThoughtFolder[] }>(`${API_URL.replace('/thoughts', '/folders')}`);
+      const response = await apiService.get<{ folders: ThoughtFolder[] }>(
+        `${API_URL.replace("/thoughts", "/folders")}`,
+      );
       return response.folders || [];
     } catch (error) {
       console.error("Error fetching folders:", error);
       // Fallback to localStorage
-      return storageService.get<ThoughtFolder[]>('folders', []);
+      return storageService.get<ThoughtFolder[]>("folders", []);
     }
   },
 
   // Create a new folder
-  async createFolder(folderData: Partial<ThoughtFolder>): Promise<ThoughtFolder> {
+  async createFolder(
+    folderData: Partial<ThoughtFolder>,
+  ): Promise<ThoughtFolder> {
     try {
       if (!authService.isAuthenticated()) {
         // Fallback to localStorage if not authenticated
         const folder: ThoughtFolder = {
           id: Date.now().toString(),
-          name: folderData.name || 'New Folder',
+          name: folderData.name || "New Folder",
           timestamp: new Date().toISOString(),
         };
-        
-        const folders = storageService.get<ThoughtFolder[]>('folders', []);
+
+        const folders = storageService.get<ThoughtFolder[]>("folders", []);
         folders.push(folder);
-        storageService.set('folders', folders);
-        
+        storageService.set("folders", folders);
+
         return folder;
       }
 
-      const result = await apiService.post<Partial<ThoughtFolder>, { folder: ThoughtFolder }>(`${API_URL.replace('/thoughts', '/folders')}`, folderData);
+      const result = await apiService.post<
+        Partial<ThoughtFolder>,
+        { folder: ThoughtFolder }
+      >(`${API_URL.replace("/thoughts", "/folders")}`, folderData);
       return result.folder;
     } catch (error) {
       console.error("Error creating folder:", error);
       // Fallback to localStorage
       const folder: ThoughtFolder = {
         id: Date.now().toString(),
-        name: folderData.name || 'New Folder',
+        name: folderData.name || "New Folder",
         timestamp: new Date().toISOString(),
       };
-      
-      const folders = storageService.get<ThoughtFolder[]>('folders', []);
+
+      const folders = storageService.get<ThoughtFolder[]>("folders", []);
       folders.push(folder);
-      storageService.set('folders', folders);
-      
+      storageService.set("folders", folders);
+
       return folder;
     }
   },
 
   // Update a folder
-  async updateFolder(folderData: Partial<ThoughtFolder> & { id: string }): Promise<ThoughtFolder> {
+  async updateFolder(
+    folderData: Partial<ThoughtFolder> & { id: string },
+  ): Promise<ThoughtFolder> {
     try {
       if (!authService.isAuthenticated()) {
         // Fallback to localStorage if not authenticated
-        const folders = storageService.get<ThoughtFolder[]>('folders', []);
-        const updatedFolders = folders.map(f => 
-          f.id === folderData.id ? { ...f, ...folderData } : f
+        const folders = storageService.get<ThoughtFolder[]>("folders", []);
+        const updatedFolders = folders.map((f) =>
+          f.id === folderData.id ? { ...f, ...folderData } : f,
         );
-        
-        storageService.set('folders', updatedFolders);
-        return updatedFolders.find(f => f.id === folderData.id) as ThoughtFolder;
+
+        storageService.set("folders", updatedFolders);
+        return updatedFolders.find(
+          (f) => f.id === folderData.id,
+        ) as ThoughtFolder;
       }
 
-      const result = await apiService.put<Partial<ThoughtFolder> & { id: string }, { folder: ThoughtFolder }>(`${API_URL.replace('/thoughts', '/folders')}`, folderData);
+      const result = await apiService.put<
+        Partial<ThoughtFolder> & { id: string },
+        { folder: ThoughtFolder }
+      >(`${API_URL.replace("/thoughts", "/folders")}`, folderData);
       return result.folder;
     } catch (error) {
       console.error("Error updating folder:", error);
       // Fallback to localStorage
-      const folders = storageService.get<ThoughtFolder[]>('folders', []);
-      const updatedFolders = folders.map(f => 
-        f.id === folderData.id ? { ...f, ...folderData } : f
+      const folders = storageService.get<ThoughtFolder[]>("folders", []);
+      const updatedFolders = folders.map((f) =>
+        f.id === folderData.id ? { ...f, ...folderData } : f,
       );
-      
-      storageService.set('folders', updatedFolders);
-      return updatedFolders.find(f => f.id === folderData.id) as ThoughtFolder;
+
+      storageService.set("folders", updatedFolders);
+      return updatedFolders.find(
+        (f) => f.id === folderData.id,
+      ) as ThoughtFolder;
     }
   },
 
@@ -157,25 +180,28 @@ export const thoughtService = {
     try {
       if (!authService.isAuthenticated()) {
         // Fallback to localStorage if not authenticated
-        const folders = storageService.get<ThoughtFolder[]>('folders', []);
-        const updatedFolders = folders.filter(f => f.id !== id);
-        storageService.set('folders', updatedFolders);
-        
+        const folders = storageService.get<ThoughtFolder[]>("folders", []);
+        const updatedFolders = folders.filter((f) => f.id !== id);
+        storageService.set("folders", updatedFolders);
+
         return true;
       }
 
-      await apiService.delete<{ id: string }, { deleted: boolean }>(`${API_URL.replace('/thoughts', '/folders')}`, { id });
+      await apiService.delete<{ id: string }, { deleted: boolean }>(
+        `${API_URL.replace("/thoughts", "/folders")}`,
+        { id },
+      );
       return true;
     } catch (error) {
       console.error("Error deleting folder:", error);
       // Fallback to localStorage
-      const folders = storageService.get<ThoughtFolder[]>('folders', []);
-      const updatedFolders = folders.filter(f => f.id !== id);
-      storageService.set('folders', updatedFolders);
-      
+      const folders = storageService.get<ThoughtFolder[]>("folders", []);
+      const updatedFolders = folders.filter((f) => f.id !== id);
+      storageService.set("folders", updatedFolders);
+
       return true;
     }
-  }
+  },
 };
 
 // Re-export these types for backward compatibility

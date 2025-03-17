@@ -1,4 +1,3 @@
-
 import { auth } from "@/lib/firebase";
 
 /**
@@ -12,7 +11,7 @@ export const authService = {
   async getIdToken(): Promise<string | null> {
     const user = auth.currentUser;
     if (!user) return null;
-    
+
     try {
       return await user.getIdToken();
     } catch (error) {
@@ -35,5 +34,5 @@ export const authService = {
    */
   getCurrentUserId(): string | null {
     return auth.currentUser?.uid || null;
-  }
+  },
 };

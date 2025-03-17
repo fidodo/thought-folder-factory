@@ -1,4 +1,3 @@
-
 import { authService } from "./authService";
 import { API_URL } from "@/lib/firebase";
 
@@ -17,7 +16,9 @@ export const apiService = {
       throw new Error("User not authenticated");
     }
 
-    const url = endpoint.startsWith('http') ? endpoint : `${API_URL}${endpoint}`;
+    const url = endpoint.startsWith("http")
+      ? endpoint
+      : `${API_URL}${endpoint}`;
     const response = await fetch(url, {
       headers: {
         Authorization: `Bearer ${idToken}`,
@@ -25,7 +26,9 @@ export const apiService = {
     });
 
     if (!response.ok) {
-      throw new Error(`HTTP Error: ${response.status} - ${response.statusText}`);
+      throw new Error(
+        `HTTP Error: ${response.status} - ${response.statusText}`,
+      );
     }
 
     return await response.json();
@@ -43,7 +46,9 @@ export const apiService = {
       throw new Error("User not authenticated");
     }
 
-    const url = endpoint.startsWith('http') ? endpoint : `${API_URL}${endpoint}`;
+    const url = endpoint.startsWith("http")
+      ? endpoint
+      : `${API_URL}${endpoint}`;
     const response = await fetch(url, {
       method: "POST",
       headers: {
@@ -54,7 +59,9 @@ export const apiService = {
     });
 
     if (!response.ok) {
-      throw new Error(`HTTP Error: ${response.status} - ${response.statusText}`);
+      throw new Error(
+        `HTTP Error: ${response.status} - ${response.statusText}`,
+      );
     }
 
     return await response.json();
@@ -72,7 +79,9 @@ export const apiService = {
       throw new Error("User not authenticated");
     }
 
-    const url = endpoint.startsWith('http') ? endpoint : `${API_URL}${endpoint}`;
+    const url = endpoint.startsWith("http")
+      ? endpoint
+      : `${API_URL}${endpoint}`;
     const response = await fetch(url, {
       method: "PUT",
       headers: {
@@ -83,7 +92,9 @@ export const apiService = {
     });
 
     if (!response.ok) {
-      throw new Error(`HTTP Error: ${response.status} - ${response.statusText}`);
+      throw new Error(
+        `HTTP Error: ${response.status} - ${response.statusText}`,
+      );
     }
 
     return await response.json();
@@ -101,7 +112,9 @@ export const apiService = {
       throw new Error("User not authenticated");
     }
 
-    const url = endpoint.startsWith('http') ? endpoint : `${API_URL}${endpoint}`;
+    const url = endpoint.startsWith("http")
+      ? endpoint
+      : `${API_URL}${endpoint}`;
     const response = await fetch(url, {
       method: "DELETE",
       headers: {
@@ -112,9 +125,11 @@ export const apiService = {
     });
 
     if (!response.ok) {
-      throw new Error(`HTTP Error: ${response.status} - ${response.statusText}`);
+      throw new Error(
+        `HTTP Error: ${response.status} - ${response.statusText}`,
+      );
     }
 
     return await response.json();
-  }
+  },
 };

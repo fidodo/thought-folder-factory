@@ -1,14 +1,13 @@
-
 import { useState, useEffect } from "react";
 import { auth } from "@/lib/firebase";
-import { 
-  createUserWithEmailAndPassword, 
-  signInWithEmailAndPassword, 
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
   signOut,
   GoogleAuthProvider,
   signInWithPopup,
   AuthError,
-  onAuthStateChanged
+  onAuthStateChanged,
 } from "firebase/auth";
 import { toast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
@@ -21,13 +20,13 @@ const AuthComponent = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState(auth.currentUser);
-  
+
   // Check for auth state changes
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
     });
-    
+
     // Cleanup subscription on unmount
     return () => unsubscribe();
   }, []);
@@ -35,7 +34,7 @@ const AuthComponent = () => {
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    
+
     try {
       await createUserWithEmailAndPassword(auth, email, password);
       toast({
@@ -59,7 +58,7 @@ const AuthComponent = () => {
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    
+
     try {
       await signInWithEmailAndPassword(auth, email, password);
       toast({
@@ -82,18 +81,18 @@ const AuthComponent = () => {
 
   const handleGoogleSignIn = async () => {
     setLoading(true);
-    
+
     try {
       const provider = new GoogleAuthProvider();
       // Add scopes if needed
-      provider.addScope('profile');
-      provider.addScope('email');
-      
+      provider.addScope("profile");
+      provider.addScope("email");
+
       // Force account selection even when already signed in
       provider.setCustomParameters({
-        prompt: 'select_account'
+        prompt: "select_account",
       });
-      
+
       await signInWithPopup(auth, provider);
       toast({
         title: "Welcome!",
@@ -141,9 +140,9 @@ const AuthComponent = () => {
             <p className="text-xs text-muted-foreground">Signed in</p>
           </div>
         </div>
-        <Button 
-          variant="outline" 
-          size="sm" 
+        <Button
+          variant="outline"
+          size="sm"
           onClick={handleSignOut}
           className="gap-2"
         >
@@ -156,14 +155,16 @@ const AuthComponent = () => {
 
   return (
     <div className="bg-card p-6 rounded-lg shadow-md mb-8">
-      <h2 className="text-xl font-medium mb-4 text-center">Sign in to save your thoughts</h2>
-      
+      <h2 className="text-xl font-medium mb-4 text-center">
+        Sign in to save your thoughts
+      </h2>
+
       <Tabs defaultValue="signin" className="w-full">
         <TabsList className="grid w-full grid-cols-2 mb-4">
           <TabsTrigger value="signin">Sign In</TabsTrigger>
           <TabsTrigger value="signup">Sign Up</TabsTrigger>
         </TabsList>
-        
+
         <TabsContent value="signin">
           <form onSubmit={handleSignIn} className="space-y-4">
             <div>
@@ -184,16 +185,12 @@ const AuthComponent = () => {
                 required
               />
             </div>
-            <Button 
-              type="submit" 
-              className="w-full" 
-              disabled={loading}
-            >
+            <Button type="submit" className="w-full" disabled={loading}>
               {loading ? "Signing in..." : "Sign In"}
             </Button>
           </form>
         </TabsContent>
-        
+
         <TabsContent value="signup">
           <form onSubmit={handleSignUp} className="space-y-4">
             <div>
@@ -215,31 +212,29 @@ const AuthComponent = () => {
                 minLength={6}
               />
             </div>
-            <Button 
-              type="submit" 
-              className="w-full" 
-              disabled={loading}
-            >
+            <Button type="submit" className="w-full" disabled={loading}>
               {loading ? "Signing up..." : "Sign Up"}
             </Button>
           </form>
         </TabsContent>
       </Tabs>
-      
+
       <div className="mt-4">
         <div className="relative my-4">
           <div className="absolute inset-0 flex items-center">
             <div className="w-full border-t"></div>
           </div>
           <div className="relative flex justify-center text-xs uppercase">
-            <span className="bg-card px-2 text-muted-foreground">Or continue with</span>
+            <span className="bg-card px-2 text-muted-foreground">
+              Or continue with
+            </span>
           </div>
         </div>
-        
-        <Button 
-          type="button" 
-          variant="outline" 
-          className="w-full" 
+
+        <Button
+          type="button"
+          variant="outline"
+          className="w-full"
           onClick={handleGoogleSignIn}
           disabled={loading}
         >

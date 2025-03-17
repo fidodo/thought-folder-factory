@@ -1,6 +1,13 @@
-
 import { useState } from "react";
-import { Folder, ChevronDown, ChevronRight, FolderPlus, MoreVertical, Edit, Trash2 } from "lucide-react";
+import {
+  Folder,
+  ChevronDown,
+  ChevronRight,
+  FolderPlus,
+  MoreVertical,
+  Edit,
+  Trash2,
+} from "lucide-react";
 
 interface FolderItemProps {
   id: string;
@@ -13,15 +20,15 @@ interface FolderItemProps {
   onSelect: () => void;
 }
 
-const FolderItem = ({ 
-  id, 
-  name, 
-  thoughts, 
-  onAddThought, 
-  onRenameFolder, 
+const FolderItem = ({
+  id,
+  name,
+  thoughts,
+  onAddThought,
+  onRenameFolder,
   onDeleteFolder,
   isActive,
-  onSelect
+  onSelect,
 }: FolderItemProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
@@ -74,20 +81,23 @@ const FolderItem = ({
 
   return (
     <div className="mb-1">
-      <div 
+      <div
         className={`flex items-center py-2 px-3 rounded-lg cursor-pointer transition-all duration-200
-          ${isActive ? 'bg-folder/10 text-folder' : 'hover:bg-gray-100'}`}
+          ${isActive ? "bg-folder/10 text-folder" : "hover:bg-gray-100"}`}
         onClick={onSelect}
       >
-        <button 
+        <button
           onClick={handleToggle}
           className="mr-1 text-gray-500 hover:text-gray-700"
         >
           {isOpen ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
         </button>
-        
-        <Folder size={18} className={`mr-2 ${isActive ? 'text-folder' : 'text-gray-500'}`} />
-        
+
+        <Folder
+          size={18}
+          className={`mr-2 ${isActive ? "text-folder" : "text-gray-500"}`}
+        />
+
         {isEditing ? (
           <input
             type="text"
@@ -102,24 +112,24 @@ const FolderItem = ({
         ) : (
           <span className="flex-1 text-sm font-medium truncate">{name}</span>
         )}
-        
+
         <div className="flex items-center">
-          <button 
+          <button
             onClick={handleAddThought}
             className="text-gray-500 hover:text-idea mr-1 p-1 rounded-full hover:bg-gray-200"
             title="Add thought to folder"
           >
             <FolderPlus size={16} />
           </button>
-          
+
           <div className="relative">
-            <button 
+            <button
               onClick={toggleMenu}
               className="text-gray-500 hover:text-gray-700 p-1 rounded-full hover:bg-gray-200"
             >
               <MoreVertical size={16} />
             </button>
-            
+
             {showMenu && (
               <div className="absolute right-0 mt-1 py-1 w-36 bg-white rounded-md shadow-lg z-10 border border-gray-200">
                 <button
@@ -141,11 +151,11 @@ const FolderItem = ({
           </div>
         </div>
       </div>
-      
+
       {isOpen && thoughts.length > 0 && (
         <div className="pl-8 mt-1 space-y-1">
           {thoughts.map((thought) => (
-            <div 
+            <div
               key={thought.id}
               className="py-1 px-2 text-sm rounded-md hover:bg-gray-100 cursor-pointer truncate"
             >

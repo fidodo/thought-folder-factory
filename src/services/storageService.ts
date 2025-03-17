@@ -1,4 +1,3 @@
-
 /**
  * Service for handling local storage operations
  */
@@ -42,5 +41,5 @@ export const storageService = {
     } catch (error) {
       console.error(`Error removing item ${key} from localStorage:`, error);
     }
-  }
+  },
 };
