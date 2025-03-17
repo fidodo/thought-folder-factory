@@ -1,27 +1,6 @@
 
-# Welcome to your Lovable project
 
-## Project info
 
-**URL**: https://lovable.dev/projects/19c73dab-76af-495c-a61c-84990412059c
-
-## How can I edit this code?
-
-There are several ways of editing your application.
-
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/19c73dab-76af-495c-a61c-84990412059c) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
 
 ```sh
 # Step 1: Clone the repository using the project's Git URL.
@@ -89,16 +68,12 @@ This project is built with:
   - PostgreSQL
   - Firebase Admin SDK
 
-## How can I deploy this project?
 
-Simply open [Lovable](https://lovable.dev/projects/19c73dab-76af-495c-a61c-84990412059c) and click on Share -> Publish.
-
+<!-- 
 For deploying the backend:
 1. Set up a server (e.g., Heroku, Render, Railway)
 2. Configure environment variables on your hosting platform
 3. Deploy the server code
-4. Update the frontend API_URL to point to your deployed backend
+4. Update the frontend API_URL to point to your deployed backend -->
 
-## I want to use a custom domain - is that possible?
 
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
