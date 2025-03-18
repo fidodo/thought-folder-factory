@@ -17,7 +17,7 @@ import {
 } from "lucide-react";
 import { auth } from "@/lib/firebase";
 import { thoughtService } from "@/services/thoughtService";
-import { Thought, ThoughtFolder } from "@/services/models"; // Updated import path
+import { Thought, ThoughtFolder } from "@/services/models";
 
 import ThoughtInput from "./ThoughtInput";
 import SortableItem from "./SortableItem";
@@ -69,6 +69,7 @@ const ThoughtsManager = () => {
     });
 
     return () => unsubscribe();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Load thoughts data from API
