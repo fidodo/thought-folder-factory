@@ -15,7 +15,7 @@ npm run dev
 ## Setting up the Backend
 
 This project includes a backend Express server that connects to PostgreSQL and Firebase. To set it up:
-
+clone https://github.com/fidodo/server
 ```sh
 # Step 1: Navigate to the server directory
 cd server
